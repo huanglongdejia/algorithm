@@ -33,33 +33,53 @@ public class MaxSequence {
     }
 
     /* 最长连续相同的子串 */
-    public String getMaxSiminarSequence(String src){
-
+    public static String getMaxSiminarSequence(String src){
         int begin = 0;
         int end = 0;
-        int newbegin = 0;
-        int count = 0;
+        int newbegin = 0; //新的起点
+        int count = 0; //记录没一段的长度
         int max = 0; //记录最大的长度
-        for(int i=0;i<src.length();i++){
-            count++;
+        for(int i=0;i<src.length()-1;i++){
             char head = src.charAt(i);
             char next = src.charAt(i+1);
+            count++;
+            if(count>max){
+                max = count;
+                begin = newbegin;
+                end = i;
+            }
             if(head!=next){
                 newbegin = i+1;
-
-            }else {
-
+                count=0;
             }
-            /*if(){
-
-            }*/
         }
-        return "";
+        return src.substring(begin,end+1);
 
     }
 
-
     /* 最长连续的子串 */
+    public static String getMaxContinueSequence(String src){
+        int begin = 0;
+        int end = 0;
+        int max = 0;
+        int count = 0;
+        int newBegin = 0;
+        for(int i=0;i<src.length()-1;i++){
+            char head = src.charAt(i);
+            char next = src.charAt(i+1);
+            count++;
+            if(count>max){
+                max = count;
+                begin = newBegin;
+                end = i;
+            }
+            if((next-head)!=1){
+                count=0;
+                newBegin=i+1;
+            }
+        }
+        return src.substring(begin,end+1);
+    }
 
     public static void main(String[] args){
         MaxSequence maxSequence = new MaxSequence();
@@ -68,5 +88,9 @@ public class MaxSequence {
         for(int j:res){
             System.out.println(j);
         }
+
+        System.out.println(getMaxSiminarSequence("hjdvvvddcd"));
+
+        System.out.println(getMaxContinueSequence("hjdvvcddcd"));
     }
 }
