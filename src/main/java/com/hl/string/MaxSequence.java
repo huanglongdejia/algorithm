@@ -180,9 +180,9 @@ public class MaxSequence {
      */
     public static boolean isContaintSequence(String strA,String strB){
         int lenB = strB.length();
-        int start = 0;
+        int start = -1;
         for(int i=0;i<lenB;i++){
-            start = findChar(strA,start,strB.charAt(i));
+            start = findChar(strA,start+1,strB.charAt(i));
             if(start==-1){
                 return false;
             }
@@ -226,7 +226,8 @@ public class MaxSequence {
 
         System.out.println(commonSubString("ABDCBDAB","BDCB"));
 
-        System.out.println(isContaintSequence("ABCD","CAD"));
+        System.out.println(isContaintSequence("ABCD","ACD"));
+        System.out.println(isContaintSequence("ABCD","AABC"));
 
     }
 }
